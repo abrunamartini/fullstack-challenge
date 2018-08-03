@@ -1,0 +1,2 @@
+-Pasta "desafio-prototipo1": Website conta número de anúncios da página, mostra anuncio de fiorino.
+-Pasta "desafio-prototipo2": Website não conta número de anúncios da página, não há link para anuncio de fiorino, porêm website melhor planejado.

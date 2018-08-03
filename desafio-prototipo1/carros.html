@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+<title>Lista - Carros</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.8/vue.js"></script>
+<link rel="stylesheet" href="css/index.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+  body,
+  h0,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  .wide,
+  .sidebar a {
+    font-family: "Roboto";
+  }
+
+  table,
+  th,
+  td {
+    table-layout: fixed;
+    border: 1px solid transparent;
+    border-collapse: collapse;
+  }
+
+  th,
+  td {
+    word-wrap: break-word;
+    padding: 5px;
+    text-align: left;
+  }
+</style>
+
+<body class="content" style="max-width:1300px">
+  <h3 class="wide" style="margin-top:45px"></h3>
+  <table style="width:100%">
+    <tr>
+      <td style="width: 25% ">
+          <a href="index.html">
+              <img src="imagens/logo.png" style="width: 100% "> </a></td>
+      <td style="width: 75%" vertical-align="middle">
+        <table style="width:100%">
+          <tr>
+            <td style="width:80%">
+              <span class="right text-blue">
+                  <a href="index.html"class="bar-item tablink button">Anúncios</a>
+                  <a href="javascript:void(0)"class="bar-item tablink button">Ajuda</a>
+                  <a href="javascript:void(0)"class="bar-item tablink button">Minha conta</a>
+              </span>
+            </td>
+
+            <td style="width:20%">
+              <span id="app">
+                <button class="button-anuncio" id="show-modal" @click="showModal = true" style="width:100% ">Crie seu anúncio!</button>
+                <modal v-if="showModal" @close="showModal = false">
+                  <h3 slot="header">INDISPONÍVEL!</h3>
+                </modal>
+              </span>
+            </td>
+          </tr>
+        </table>
+
+      </td>
+    </tr>
+    <tr>
+      <td class="text-blue">
+        Anúncios > Carros
+      </td>
+      <td>
+        <table style="width:100%">
+          <tr>
+            <td style="padding-left:30px; width:74%">
+              <div id="app2">
+                <tamanhocarros></tamanhocarros>
+              </div>
+            </td>
+
+            <td class="medium" style="width:26%">
+              <div id="sele">
+                <span>Ordenar por:</span>
+                <select v-model="selected" class="text-default" style="border:transparent">
+                  <!--opd value="">selecione</option-->
+                  <option class="text-default">Menor Preço</option>
+                  <option class="text-default">Maior Preço </option>
+                  <option class="text-default">Mais Recentes</option>
+                </select>
+              </div>
+            </td>
+          </tr>
+        </table>
+
+      </td>
+
+
+    </tr>
+    <tr>
+      <td style="width: 25%" valign="top">
+        <div class="row">
+          <!-- menu -->
+          <div class="col l3">
+            <div class="text-dark-grey box-menu">
+
+              <div class="text-dark-grey ">
+                <b>Filtre sua pesquisa</b>
+              </div>
+              <hr>
+              <div class=" text-grey medium   ">
+                <em>
+                  <i>Busque por palavra-chave</i>
+                </em>
+                <div class="fa fa-search right text-black"></div>
+              </div>
+              <hr>
+
+              <table class="width:100% medium ">
+                <tr>
+                  <td colspan="2">
+                    <b>Quilometragem</b>
+                  </td>
+                </tr>
+                <tr class="text-gray">
+                  <td class="box-infos">
+                    <em>de</em>
+                  </td>
+                  <td class="box-infos">
+                    <em>até</em>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <b>Ano</b>
+                  </td>
+                </tr>
+                <tr class="text-gray">
+                  <td class="box-infos">
+                    <em>de</em>
+                  </td>
+                  <td class="box-infos">
+                    <em>até</em>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <b> Combustível</b>
+                    <label class="container medium">
+                        <input type="checkbox" >-- Gasolina          
+                        <span class="checkmark"></span>
+                      </label>
+                      <label class="container medium">-- Álcool
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                      </label>
+                      <label class="container medium">-- Disel
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                      </label>
+                      <label class="container medium">-- Gás Natural
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                      </label>
+                  </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <button class="button-filtrar text-white"> Filtrar</button>
+                    </td>
+                </tr>
+              </table>
+
+            </div>
+          </div>
+        </div>
+      </td>
+      <td rowspan="2"  valign="top">
+        <div class="col l8 s12">
+          <!-- Produtos -->
+          <div id="app1">
+            <carros></carros>
+          </div>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td></td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <!-- rodapé da página-->
+        <footer class=" padding-64  navy-blue  small justify" id="footer">
+          <div class=" row-padding ">
+            <div class=" col s4 ">
+              <h0>
+                <b>ovendor.com :)</b>
+              </h0>
+              <h4>Política de Resposabilidade</h4>
+              <h4>Ajuda</h4>
+              <h4>Minha Conta</h4>
+              <h4>Anúncios</h4>
+            </div>
+
+            <div class=" col s4 " style="margin-top:55px">
+              <h4>Trabalhe Conosco</h4>
+              <h4>Pesquisas Populares</h4>
+              <h4>Dicas para sua Negociação</h4>
+            </div>
+
+            <div class="col s4 center" style="margin-top:80px">
+              <br>
+              <a href="https://www.facebook.com/"></a>
+              <i class="fa fa-facebook-official hover-opacity color-default large"></i></a>
+              <a href="https://www.twitter.com/">
+              <i class="fa fa-twitter hover-opacity color-default large"></i></a>
+              <a href="https://www.youtube.com/">
+              <i class="fa fa-youtube hover-opacity color-default large"></i></a>
+              <a href="https://www.google.com/">
+              <i class="fa fa-google hover-opacity color-default large"></i></a>
+            </div>
+          </div>
+        </footer>
+      </td>
+      <!-- cÃ©lula que ocupa 2 colunas -->
+    </tr>
+  </table>
+
+  <script>
+    function openMenu(evt, menuName) {
+      var i, x, tablinks;
+      x = document.getElementsByClassName("menu");
+      for (i = 0; i < x.length; i++) {
+        x[i].style.display = "none";
+      }
+      tablinks = document.getElementsByClassName("tablink");
+      for (i = 0; i < x.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace("grey ", "");
+      }
+      document.getElementById(menuName).style.display = "block";
+      //evt.currentTarget.firstElementChild.className += " grey";
+    }
+  </script>
+
+  <div id="el"></div>
+
+  <!-- using string template here to work around HTML <option> placement restriction -->
+  <script type="text/x-template" id="demo-template">
+  <div>
+    <b>Ordenar por:</b>
+    <select2 :options="options" v-model="selected">
+      <option disabled value="0">Select one</option>
+    </select2>
+  </div>
+</script>
+
+  <script type="text/x-template" id="select2-template">
+  <select>
+    <slot></slot>
+  </select>
+</script>
+
+  <script type="text/x-template" id="modal-template">
+      <transition name="modal">
+        <div class="modal-mask">
+          <div class="modal-wrapper">
+            <div class="modal-container">
+              <div class="modal-header"> 
+                <slot name="header">
+                    default header
+                  </slot>
+              </div>
+              <div class="modal-body">
+                  <slot name="body">
+                   <b> Esta página ainda não está habilitada. </b>
+                   <button class="modal-default-button" @click="$emit('close')">
+                      OK
+                    </button>
+                  </slot>
+              </div>
+              </div>
+        </div>
+      </transition>
+    </script>
+</body>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
+
+</html>
